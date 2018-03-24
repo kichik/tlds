@@ -19,7 +19,7 @@ class build_tld_py(build_py):
             target_dir = os.path.join(self.build_lib, 'tlds')
             self.mkpath(target_dir)
 
-            with open(os.path.join(target_dir, '__init__.py'), 'w') as f:
+            with open(os.path.join(target_dir, '_data.py'), 'w') as f:
                 f.write(f'tld_set = set({tlds})\n')
 
         build_py.run(self)
