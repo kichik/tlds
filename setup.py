@@ -29,7 +29,7 @@ class build_tld_py(build_py):
             self.mkpath(target_dir)
 
             with open(os.path.join(target_dir, '_data.py'), 'w') as f:
-                f.write('tld_set = set(%s)\n' % [tlds])
+                f.write('tld_set = set(%s)\n' % (tlds, ))
 
         build_py.run(self)
 
