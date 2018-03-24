@@ -1,14 +1,23 @@
 import os
 import re
 import sys
-import urllib.request
 from distutils.command.build_py import build_py
 
 from setuptools import setup, find_packages
 
-r = urllib.request.urlopen('http://data.iana.org/TLD/tlds-alpha-by-domain.txt')
-assert r.status == 200
-data = r.read().decode('utf-8').split('\n')
+if sys.version_info.major >= 3:
+    import urllib.request
+
+    r = urllib.request.urlopen('http://data.iana.org/TLD/tlds-alpha-by-domain.txt')
+    assert r.status == 200
+    data = r.read().decode('utf-8').split('\n')
+else:
+    import urllib
+    
+    r = urllib.urlopen('http://data.iana.org/TLD/tlds-alpha-by-domain.txt')
+    assert r.getcode() == 200
+    data = r.read().split('\n')
+    
 version = re.match('^# Version (?P<version>[0-9]+).*$', data[0]).group('version')
 tlds = [i.lower() for i in data[1:] if i and not i.startswith('#')]
 
@@ -20,7 +29,7 @@ class build_tld_py(build_py):
             self.mkpath(target_dir)
 
             with open(os.path.join(target_dir, '_data.py'), 'w') as f:
-                f.write(f'tld_set = set({tlds})\n')
+                f.write('tld_set = set(%s)\n' % [tlds])
 
         build_py.run(self)
 
