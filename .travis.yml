@@ -2,7 +2,7 @@ language: python
 python:
   - "3.6"
 before_script:
-  - "curl -s https://pypi.python.org/pypi/tlds/json | jq -r .info.version || echo none > /tmp/pkgver"
+  - "echo `curl -s https://pypi.python.org/pypi/tlds/json | jq -r .info.version || echo none` > /tmp/pkgver"
   - "curl -s http://data.iana.org/TLD/tlds-alpha-by-domain.txt | head -n 1 | grep -Po \"(?<=Version )[0-9]+\" > /tmp/dbver"
 script: echo current=`cat /tmp/pkgver` iana=`cat /tmp/dbver`
 deploy:
