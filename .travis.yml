@@ -1,0 +1,24 @@
+language: python
+python:
+  - "3.6"
+before_script:
+  - "curl -s https://pypi.python.org/pypi/tlds/json | jq -r .info.version || echo none > /tmp/pkgver"
+  - "curl -s http://data.iana.org/TLD/tlds-alpha-by-domain.txt | head -n 1 | grep -Po \"(?<=Version )[0-9]+\" > /tmp/dbver"
+script: echo current=`cat /tmp/pkgver` iana=`cat /tmp/dbver`
+deploy:
+  provider: pypi
+  distributions: "sdist bdist_wheel"
+  user:
+    secure: "1veio8UTPn0L+KKotm2u/QxYf8L9a4pkLO7WPfChhRHXK5RTGKRRUHqCFvlzGEBxGWIcWbdXSrpA24GTmBIvEnbqU97HUa6ZTCA/jqIq/gA1256S6Gksoy68s0c41Bg0M/v4W/6YOSq7wlexcmAP4G+/AUsZywokvy/gABQLAm4omy8zxlksrXCTqv2c05OSSr2C9SmR2srZb42Mq3Exn5sCO3lkDL91f9k+e93e+K7zFrGGsFVKzJtm+SOoFIqkR6EwdaJjtksy2P+te/f2gJzaVQQmRoUrKeGB4/+GS21IO21QQyQan6LXcSO7XuYECiVbuGkM1TNakaz2JksrSiqoGCvaT5V3J/QZRdCMwLYMf95VP5nDyBBS19bGosUzrLGjNZUvfAIrduBEcsGzBBw6NvinEBRV48oGw79X3eAeHUctyYmgczGIWc/qnH9wUX3ULu/zZ+DbaaUGsVw6P8CGLcdhVNx6wlOf+W6Qt2irg/nIXw/NaRrxMbA+Fgqx2GX1RstHUso1sPHSuIR4+yc3tutIdZsneZZklvNsg0tF+3TE47121O0Mo5hQX8u6/gkpUBJyN+qn6D54I38O4a4TJbWpf5CLNxWypeJ42dsuCzoU4xTWH5NH+AIUTNhrWCQ/K85uQ+DminkBlXIlj6otyUdZBd6/cyE0Ix+GTuY="
+  password:
+    secure: "gE6DWkKCROqb9p6Qt5RHIaT3u9HIIxNiqNFiI2TzUjGiGX+71egPPhT54BpH4T4c0RR1e9OVkHDEv7GqbtQE2bUpJ9p1/3FJyR/Aq8DN9RPUCQKBdnJO7/Wca6kJjOCZ5l++718Qvuxkj8ot+IwuXJpm7UF6Xcsq0XXVKZEix97wmhPcaS1ZBaGxETdiKkncdgVbeSytMPByIgAWlQWBgSygz5Tm4dFvffmHHyEP0BaSm73CuLi3KGN2uNPmimMuugcv8V3JGIHL3CL7XuoB3CiUnLtQ91i8tr4d2MYePIak+AkSJi0uXM5RjyCNVzx6PmsKPvoQ7fePsOUa4yLo7LqCF4HEubfNcNhmMrvWC4KcUl8vQVr7V0qmXe22vggMYzbMl+98FNEkLs3t9VxYh0o8dMT02tnpwE5gRq0ymvylFHv2LN8O9WWwQy9bOuT9wRvgTC5IqrwMLdb/XnmbkNkauEKeMyR+R78UgFiHNImthZdEMkiu4A0Ur9bDAknNNI1AD6GqsOUtiO1GiMypn94VkzFmSDWFmvDHP8KzwLiInJSh6Da7eHhmjhK0c/IW5+4T7NEdkGt/M9dJGwZ+FClZ0bXHgvq856NfheTak/7YPI38CBUOiLxfImdGpSKmndCuO2knFVaPJWWq/83U3y29ADIH998iihoTXw7WGlY="
+  on:
+    repo: kichik/tlds
+    branch: master
+    python: "3.6"
+    condition: "`cat /tmp/pkgver` != `cat /tmp/dbver`"
+addons:
+  apt:
+    packages:
+      - curl
+      - jq
