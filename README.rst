@@ -7,7 +7,7 @@ The `tlds` module provides a a set of valid TLDs directly taken from IANA_. The 
 Available on PyPI_.
 
 .. _IANA: http://data.iana.org/TLD/tlds-alpha-by-domain.txt
-.. _PyPI: https://pypi.python.org/pypi/tlds/
+.. _PyPI: https://pypi.org/pypi/tlds/
 
 .. image:: https://travis-ci.org/kichik/tlds.svg?branch=master
    :target: https://travis-ci.org/kichik/tlds
