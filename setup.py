@@ -8,13 +8,13 @@ from setuptools import setup, find_packages
 if sys.version_info.major >= 3:
     import urllib.request
 
-    r = urllib.request.urlopen('http://data.iana.org/TLD/tlds-alpha-by-domain.txt')
+    r = urllib.request.urlopen('https://data.iana.org/TLD/tlds-alpha-by-domain.txt')
     assert r.status == 200
     data = r.read().decode('utf-8').split('\n')
 else:
     import urllib
     
-    r = urllib.urlopen('http://data.iana.org/TLD/tlds-alpha-by-domain.txt')
+    r = urllib.urlopen('https://data.iana.org/TLD/tlds-alpha-by-domain.txt')
     assert r.getcode() == 200
     data = r.read().split('\n')
     
