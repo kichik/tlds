@@ -9,8 +9,8 @@ Available on PyPI_.
 .. _IANA: http://data.iana.org/TLD/tlds-alpha-by-domain.txt
 .. _PyPI: https://pypi.org/pypi/tlds/
 
-.. image:: https://travis-ci.org/kichik/tlds.svg?branch=master
-   :target: https://travis-ci.org/kichik/tlds
+.. image:: https://github.com/kichik/tlds/workflows/tlds%20build/badge.svg
+   :target: https://github.com/kichik/tlds/actions
 
 .. image:: https://badge.fury.io/py/tlds.svg
     :target: https://badge.fury.io/py/tlds
