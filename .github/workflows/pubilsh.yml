@@ -22,6 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt install -y jq curl
+          pip install wheel
       - name: Get latest domains
         id: get
         run: |
