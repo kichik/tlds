@@ -14,9 +14,9 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: 3.10
       - name: Install dependencies
@@ -35,7 +35,7 @@ jobs:
           python setup.py sdist bdist_wheel
       - name: Publish to PyPI
         if: ${{ steps.get.outputs.pkgver != steps.get.outputs.dbver }}
-        uses: pypa/gh-action-pypi-publish@master
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: ${{ secrets.pypi_user }}
           password: ${{ secrets.pypi_password }}
