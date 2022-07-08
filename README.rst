@@ -10,10 +10,16 @@ Available on PyPI_.
 .. _PyPI: https://pypi.org/pypi/tlds/
 
 .. image:: https://github.com/kichik/tlds/workflows/tlds%20build/badge.svg
+   :alt: Build status
    :target: https://github.com/kichik/tlds/actions
 
-.. image:: https://badge.fury.io/py/tlds.svg
-    :target: https://badge.fury.io/py/tlds
+.. image:: https://img.shields.io/pypi/v/tlds?logo=pypi
+   :alt: PyPI
+   :target: https://pypi.org/pypi/tlds/
+
+.. image:: https://img.shields.io/pypi/dm/tlds?color=red
+   :alt: PyPI - Downloads
+   :target: https://pypi.org/pypi/tlds/
 
 Usage
 -----
