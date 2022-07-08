@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: "3.10"
       - name: Install dependencies
         run: |
           sudo apt install -y jq curl
@@ -30,11 +30,11 @@ jobs:
           echo "::set-output name=pkgver::`curl -s https://pypi.org/pypi/tlds/json | jq -r .info.version || echo none`"
           echo "::set-output name=dbver::`curl -s https://data.iana.org/TLD/tlds-alpha-by-domain.txt | head -n 1 | grep -Po \"(?<=Version )[0-9]+\"`"
       - name: Build a binary wheel and a source tarball
-        if: ${{ steps.get.outputs.pkgver != steps.get.outputs.dbver }}
+        if: steps.get.outputs.pkgver != steps.get.outputs.dbver
         run: |
           python setup.py sdist bdist_wheel
       - name: Publish to PyPI
-        if: ${{ steps.get.outputs.pkgver != steps.get.outputs.dbver }}
+        if: steps.get.outputs.pkgver != steps.get.outputs.dbver && github.ref == 'master'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: ${{ secrets.pypi_user }}
