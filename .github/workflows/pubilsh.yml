@@ -3,7 +3,7 @@ name: tlds build
 on:
   push:
     branches:
-      - python-3.10
+      - master
   schedule:
     - cron:  '10 5 * * *'
 
