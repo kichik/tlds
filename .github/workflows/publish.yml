@@ -26,13 +26,13 @@ jobs:
         id: get
         run: |
           set -ex
-          echo "pkgver=`curl -s https://pypi.org/pypi/tlds/json | jq -r .info.version || echo none`" >> $GITHUB_STATE
-          echo "newver=`cat version`" >> $GITHUB_STATE
+          echo "pkgver=`curl -s https://pypi.org/pypi/tlds/json | jq -r .info.version || echo none`" >> $GITHUB_OUTPUT
+          echo "newver=`cat version`" >> $GITHUB_OUTPUT
       - name: Build a binary wheel and a source tarball
         run: |
           python setup.py sdist bdist_wheel
       - name: Publish to PyPI
-        if: steps.get.outputs.pkgver != steps.get.outputs.newver && github.ref == 'ref/heads/master'
+        if: steps.get.outputs.pkgver != steps.get.outputs.newver && github.ref == 'refs/heads/master'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: ${{ secrets.pypi_user }}
