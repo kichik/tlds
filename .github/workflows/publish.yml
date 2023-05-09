@@ -1,6 +1,7 @@
 name: tlds build
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
