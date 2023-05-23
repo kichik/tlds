@@ -5,12 +5,25 @@ on:
   push:
     branches:
       - master
+  schedule: 
+    - cron: "21 4 * * *"
 
 jobs:
-  publish:
-    name: Publish
+  update:
+    name: Update from IANA
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update top-level domains from iana
+        run: ./update.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    runs-on: ubuntu-22.04
+  publish:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+
+    needs: update
 
     steps:
       - uses: actions/checkout@v3
