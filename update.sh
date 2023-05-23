@@ -4,12 +4,10 @@ set -eux
 
 ./build.py
 
-if [ -z "$(git diff --exit-code)" ]; then
+if [ -z "$(git diff tlds/_data.py --exit-code)" ]; then
     echo "No changes to the output on this push; exiting."
     exit 0
 fi
-
-find .
 
 export VERSION=$(cat version)
 
