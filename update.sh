@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-set -eux
+set -eux -o pipefail
 
 ./build.py
 
-if [ -z "$(git diff tlds/_data.py --exit-code)" ]; then
+if [ -z "$(git diff --exit-code tlds/_data.py)" ]; then
     echo "No changes to the output on this push; exiting."
     exit 0
 fi
