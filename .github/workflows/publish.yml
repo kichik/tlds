@@ -47,6 +47,3 @@ jobs:
       - name: Publish to PyPI
         if: steps.get.outputs.pkgver != steps.get.outputs.newver && github.ref == 'refs/heads/master'
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: ${{ secrets.pypi_user }}
-          password: ${{ secrets.pypi_password }}
