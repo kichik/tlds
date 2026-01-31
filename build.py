@@ -5,7 +5,12 @@ import re
 import urllib.request
 
 # fetch latest tlds file from iana
-r = urllib.request.urlopen("https://data.iana.org/TLD/tlds-alpha-by-domain.txt")
+r = urllib.request.urlopen(urllib.request.Request(
+    "https://data.iana.org/TLD/tlds-alpha-by-domain.txt",
+    headers={
+        "User-Agent": "https://github.com/kichik/tlds/"
+    },
+))
 assert r.status == 200
 lines = r.read().decode("utf-8").split("\n")
 
